@@ -15,7 +15,7 @@ ADD . .
 
 RUN python -m pip install --upgrade pip==21.3.1
 # 安装依赖
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 EXPOSE ${PORT}
 

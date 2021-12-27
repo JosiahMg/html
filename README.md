@@ -30,3 +30,4 @@ for example:
 
 # 访问方法
 127.0.0.1:5000
+如果使用docker-compose需要将127.0.0.1修改为docker-compose.yml中设置的container_name即 rasa_eq
