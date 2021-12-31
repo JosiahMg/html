@@ -68,13 +68,12 @@ def chat():
         response = requestRasabotServer('josiah', content)
         # string
         response = response.text.encode('utf-8').decode("unicode-escape")
-        response = json.loads(response)
+        response = json.loads(response, strict=False)
         res = []
         for text in response:
             res.append(text['text'])
 
         res = '\n'.join(res)  # 使用回车拼接多个信息
-        print(res)
         return jsonify({"status": "success", "response": res})
     except Exception as e:
         return jsonify({"status": "success", "response": "非常抱歉，连接服务器失败"})
