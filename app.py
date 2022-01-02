@@ -40,7 +40,12 @@ def requestRasabotServer(userid, content):
     :return:  json格式响应数据
     """
     params = {'sender': userid, 'message': content}
-    botIp = "rasa_ep"  # 使用docker-compose中设置的container_name
+
+    if platform.system().lower() == 'windows':
+        botIp = "127.0.0.1"
+    elif platform.system().lower() == 'linux':
+        botIp = "rasa_ep"  # 使用docker-compose中设置的container_name
+
     botPort = '5005'
     # rasa使用rest channel
     # https://rasa.com/docs/rasa/user-guide/connectors/your-own-website/#rest-channels
