@@ -68,7 +68,7 @@ def chat():
     and constructs response from response.py
     """
     content = request.form["text"]
-    logger.info(F'retrun from rasa text: {content}')
+    logger.info(F'get from web ui text: {content}')
     if content is None:
         return jsonify({"status": "success", "response": "您输入的内容为空"})
     try:
