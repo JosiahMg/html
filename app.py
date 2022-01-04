@@ -1,9 +1,9 @@
-from os import execlp
 from flask import Flask
 from flask import render_template, jsonify, request
 import requests
-# from models import *
 import json
+import platform
+from create_log import logger
 
 app = Flask(__name__)
 """
@@ -47,6 +47,7 @@ def requestRasabotServer(userid, content):
         botIp = "rasa_ep"  # 使用docker-compose中设置的container_name
 
     botPort = '5005'
+    logger.debug(F'server ip {botIp}:{botPort}')
     # rasa使用rest channel
     # https://rasa.com/docs/rasa/user-guide/connectors/your-own-website/#rest-channels
     # POST http://<host>:<port>/webhooks/rest/webhook
@@ -73,14 +74,18 @@ def chat():
         response = requestRasabotServer('josiah', content)
         # string
         response = response.text.encode('utf-8').decode("unicode-escape")
+        logger.debug(F'retrun from rasa string: {response}')
         response = json.loads(response, strict=False)
+        logger.debug(F'retrun from rasa json: {response}')
         res = []
         for text in response:
             res.append(text['text'])
 
         res = '\n'.join(res)  # 使用回车拼接多个信息
+        logger.info(F'retrun from rasa text: {res}')
         return jsonify({"status": "success", "response": res})
     except Exception as e:
+        logger.error(e)
         return jsonify({"status": "success", "response": "非常抱歉，连接服务器失败"})
 
 
