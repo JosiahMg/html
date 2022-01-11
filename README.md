@@ -1,9 +1,16 @@
-# 使用方法
+# RUN
+you can run directed:
 ```shell
+pip install --no-cache-dir -r requirements.txt
 python app.py
 ```
+or simple way by docker
+```shell
+docker build -t rasa_html .
+docker run -d -p 5000:5000 rasa_html
+```
 
-# 依赖
+# Dependence
 ```shell
 flask==2.0.2
 itsdangerous==2.0.1
@@ -12,10 +19,9 @@ MarkupSafe==2.0.1
 ```
 
 # REST
-
-REST channel  使用POST方法访问下面的url
+REST channel: POST
 http://<host>:<port>/webhooks/rest/webhook,
-参数格式为:
+format:
 {
   "sender": "test_user",  // sender ID of the user sending the message
   "message": "Hi there!"
@@ -28,9 +34,8 @@ for example:
 ]
 
 
-# 访问方法
-127.0.0.1:5000
-如果使用docker-compose需要将127.0.0.1修改为docker-compose.yml中设置的container_name即 rasa_eq
+# Visit
+local host to visit: 127.0.0.1:5000
 
-# 效果演示
+# Display
 ![聊天窗口](./imgs/demo.png)
